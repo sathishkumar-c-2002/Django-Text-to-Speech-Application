@@ -1,49 +1,137 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
     <title>Text-to-Speech.ai</title>
 
-  </head>
-  <body>
-    <nav class="navbar navbar-light bg-light">
+    <style>
+        body {
+            background-color: #f4f7fa; /* Light background for contrast */
+            color: #333; /* Dark text color */
+            font-family: 'Montserrat', sans-serif; /* Modern font */
+        }
+        .navbar {
+            background-color: #fff; /* White navbar */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .hero {
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            color: white;
+            padding: 100px 0; /* Hero padding */
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem; /* Large title */
+            margin-bottom: 20px; /* Spacing */
+        }
+        .container {
+            margin-top: -50px; /* Overlap the hero section */
+            position: relative; /* Relative positioning */
+            z-index: 1; /* On top of the hero */
+        }
+        .card {
+            border: none; /* No border */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Card shadow */
+            transition: transform 0.3s; /* Smooth scaling */
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Hover effect */
+        }
+        .form-control {
+            border-radius: 15px; /* Rounded input */
+            padding: 15px; /* Padding for inputs */
+        }
+        .btn-primary {
+            background-color: #ff4757; /* Button color */
+            border: none; /* No border */
+            border-radius: 15px; /* Rounded button */
+            padding: 10px 20px; /* Padding for button */
+        }
+        .btn-primary:hover {
+            background-color: #ff6b81; /* Button hover color */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+        audio {
+            width: 100%; /* Full width audio player */
+            margin-top: 20px; /* Spacing */
+            border-radius: 15px; /* Rounded audio player */
+        }
+        footer {
+            background-color: #343a40; /* Dark footer background */
+            color: #fff; /* White text color */
+            padding: 20px 0; /* Padding for footer */
+            text-align: center; /* Centered text */
+        }
+        footer a {
+            color: #ff4757; /* Link color */
+            text-decoration: none; /* No underline */
+        }
+        footer a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <div class="d-flex justify-content-between w-100">  <!-- Use w-100 to ensure full width -->
-                <a class="navbar-brand" href="#">Text-To-Speech.ai</a>  <!-- Example brand link -->
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+            <a class="navbar-brand" href="#">Text-To-Speech.ai</a>
         </div>
     </nav>
-    
-    
-    <h1>Text to Speech</h1>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="text" rows="4" cols="50" placeholder="Enter text here..."></textarea><br><br>
-        <button type="submit">Convert to Speech</button>
-    </form>
 
-    {%if audio_url%}
-    <h2>Generated Audio</h2>
-    <audio controls>
-        <source src="{{audio_url}}" type="audio/mpeg"> 
-        Your browser does not support the audio format
-    </audio>
-    {%endif%}
-  
+    <div class="hero">
+        <h1>Welcome to Text-to-Speech.ai</h1>
+        <p>Convert text into high-quality audio effortlessly.</p>
+    </div>
     
-    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Text to Speech</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <textarea name="text" rows="4" class="form-control" placeholder="Enter text here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Convert to Speech</button>
+                        </form>
+
+                        {% if audio_url %}
+                        <h3 class="mt-4">Generated Audio</h3>
+                        <audio controls>
+                            <source src="{{ audio_url }}" type="audio/mpeg"> 
+                            Your browser does not support the audio format.
+                        </audio>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Text-to-Speech.ai. All rights reserved.</p>
+            <p> 
+                <a href="https://github.com/sathishkumar-c-2002">GitHub</a> | 
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    
-  </body>
+</body>
 </html>
