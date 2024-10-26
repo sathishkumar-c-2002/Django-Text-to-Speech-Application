@@ -22,7 +22,7 @@ def text_to_speech(request):
         # Set the audio URL to be used in the template
         audio_url = os.path.join("media","audio.mp3")
         
-
+    
         
         # #Using the audio file
         # with open(audio_path,"rb") as audio_file:
@@ -32,4 +32,3 @@ def text_to_speech(request):
         
     
     return render(request, "text_to_speech.html",{"audio_url":audio_url})
-        
