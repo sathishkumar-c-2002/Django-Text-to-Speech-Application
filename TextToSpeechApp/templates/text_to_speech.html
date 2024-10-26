@@ -134,8 +134,7 @@
 
                         {% if audio_url %}
                         <h3 class="mt-4">Generated Audio</h3>
-                        <audio controls>
-                            
+                        <audio controls>    
                             <source src="{{ audio_url }}" type="audio/mpeg"> 
                             Your browser does not support the audio format.
                         </audio>
@@ -150,10 +149,10 @@
                                         <a class="dropdown-item" href="{{ audio_url }}" download="audio.mp3">Download MP3</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ audio_url }}" download="audio.wav">Download WAV</a>
+                                        <a class="dropdown-item" href="{{ audio_url_wav }}" download="audio.wav">Download WAV</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="{{ audio_url }}" download="audio.ogg">Download OGG</a>
+                                        <a class="dropdown-item" href="{{ audio_url_ogg }}" download="audio.ogg">Download OGG</a>
                                     </li>
                                 </ul>
                             </div>

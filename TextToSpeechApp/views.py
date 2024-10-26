@@ -21,6 +21,8 @@ def text_to_speech(request):
         
         # Set the audio URL to be used in the template
         audio_url = os.path.join("media","audio.mp3")
+        audio_url_wav = os.path.join("media","audio.wav")
+        audio_url_ogg = os.path.join("media","audio.ogg")
         
     
         
